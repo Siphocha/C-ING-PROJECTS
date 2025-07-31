@@ -39,7 +39,7 @@ int main() {
         return 1;
     }
 
-    // Remove newline character
+    //Remove newline character or characters just incase
     filename[strcspn(filename, "\n")] = '\0';
 
     while (1) {
@@ -79,6 +79,7 @@ int main() {
     return 0;
 }
 
+//Menu of the total list of options
 void displayMenu(const FileOperationInfo* operations, int count) {
     printf("\nOperations List:\n");
     for (int i = 0; i < count; i++) {
@@ -87,6 +88,7 @@ void displayMenu(const FileOperationInfo* operations, int count) {
     printf("0. Exit\n");
 }
 
+//Taking the users full constant choice
 int getOperationChoice(int max) {
     int choice;
     printf("\nSelect an option (0-%d): ", max);
@@ -103,10 +105,11 @@ int getOperationChoice(int max) {
             return choice;
         }
 
-        printf("Enter one of the specified numbers %d: ", max);
+        printf("Enter one of the numbers %d: ", max);
     }
 }
 
+//Adding data to file when added new info
 int addDataToFile(const char* filename, void** result) {
     char buffer[1024];
     printf("Data to add to the file: ");
@@ -136,6 +139,7 @@ int addDataToFile(const char* filename, void** result) {
     return 0;
 }
 
+//Able to count lines in the file
 int countLinesInFile(const char* filename, void** result) {
     FILE* file = fopen(filename, "r");
     if (file == NULL) {
@@ -169,6 +173,7 @@ int countLinesInFile(const char* filename, void** result) {
     return 0;
 }
 
+//Actually parsing the character types in the file
 int countCharsInFile(const char* filename, void** result) {
     FILE* file = fopen(filename, "r");
     if (file == NULL) {
@@ -187,6 +192,7 @@ int countCharsInFile(const char* filename, void** result) {
     return 0;
 }
 
+//Chars to upper
 int convertFileToUpper(const char* filename, void** result) {
     FILE* file = fopen(filename, "r+");
     if (file == NULL) {
@@ -207,6 +213,7 @@ int convertFileToUpper(const char* filename, void** result) {
     return 0;
 }
 
+//function for chars to lower
 int convertFileToLower(const char* filename, void** result) {
     FILE* file = fopen(filename, "r+");
     if (file == NULL) {
@@ -227,12 +234,14 @@ int convertFileToLower(const char* filename, void** result) {
     return 0;
 }
 
+//display all outputs of whichever outcome
 void Result(void* result) {
     if (result != NULL) {
         free(result);
     }
 }
 
+//better be safe with memory
 void* safeMalloc(size_t size) {
     void* ptr = malloc(size);
     if (ptr == NULL) {
